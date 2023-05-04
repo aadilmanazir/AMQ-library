@@ -114,44 +114,24 @@ class Evens(object):
         return int(math.ceil(self.maximum / 2.0))
 
 
-def give_description(filename):
-    """
-    Return a description of the filename type
-
-    Could be array, file or hybrid.
-    """
-    if filename is None:
-        return 'array'
-    elif isinstance(filename, tuple):
-        if filename[1] == -1:
-            return 'mmap'
-        else:
-            return 'hybrid'
-    else:
-        return 'seek'
-
-
 class TestBloomFilter(unittest.TestCase):
     def _test(
         self,
-        description, values, trials, error_rate,
-        probe_bitnoer=None, filename=None,
+        description, 
+        values, 
+        trials, 
+        error_rate
     ):
         # pylint: disable=R0913,R0914
         # R0913: We want a few arguments
         # R0914: We want some local variables too.  This is just test code.
         """Some quick automatic tests for the bloom filter class"""
-        if not probe_bitnoer:
-            probe_bitnoer = bloom_filter2.get_filter_bitno_probes
 
         divisor = 100000
 
         bloom = bloom_filter2.BloomFilter(
             max_elements=values.length() * 2,
             error_rate=error_rate,
-            probe_bitnoer=probe_bitnoer,
-            filename=filename,
-            start_fresh=True,
         )
 
         message = '\ndescription: %s num_bits_m: %s num_probes_k: %s\n'
@@ -205,8 +185,6 @@ class TestBloomFilter(unittest.TestCase):
             ),
         )
 
-        bloom.close()
-
     def test_and(self):
         """Test the & operator"""
 
@@ -224,9 +202,6 @@ class TestBloomFilter(unittest.TestCase):
         self.assertIn('b', abc)
         self.assertIn('c', abc)
         self.assertNotIn('d', abc)
-
-        abc.close()
-        bcd.close()
 
     def test_or(self):
         """Test the | operator"""
@@ -247,9 +222,6 @@ class TestBloomFilter(unittest.TestCase):
         self.assertIn('d', abc)
         self.assertNotIn('e', abc)
 
-        abc.close()
-        bcd.close()
-
     def test_states(self):
         self._test('states', States(), trials=100000, error_rate=0.01)
 
@@ -265,7 +237,7 @@ class TestBloomFilter(unittest.TestCase):
             Random_content(),
             trials=10000,
             error_rate=0.1,
-            filename=filename,
+
         )
 
     @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
@@ -275,48 +247,36 @@ class TestBloomFilter(unittest.TestCase):
         sqrt_of_10 = math.sqrt(10)
         for exponent in range(19):  # it's a lot, but probably not unreasonable
             elements = int(sqrt_of_10 ** exponent + 0.5)
-            for filename in [
-                None,
-                'bloom-filter-rm-me',
-                ('bloom-filter-rm-me', 768 * 2 ** 20),
-                ('bloom-filter-rm-me', -1),
-            ]:
-                description = give_description(filename)
-                key = '%s %s' % (description, elements)
-                with dbm.open('performance-numbers', 'c') as database:
-                    if key in database.keys():
-                        continue
-                if elements >= 100000000 and description == 'seek':
+            description = "array"
+            key = '%s %s' % (description, elements)
+            with dbm.open('performance-numbers', 'c') as database:
+                if key in database.keys():
                     continue
-                if elements >= 100000000 and description == 'mmap':
-                    continue
-                if elements >= 1000000000 and description == 'array':
-                    continue
-                time0 = time.time()
-                self._test(
-                    'evens %s elements: %d' % (
-                        give_description(filename),
-                        elements,
-                    ),
-                    Evens(elements),
-                    trials=elements,
-                    error_rate=1e-2,
-                    filename=filename,
-                )
-                time1 = time.time()
-                delta_t = time1 - time0
-                # file_ = open('%s.txt' % description, 'a')
-                # file_.write('%d %f\n' % (elements, delta_t))
-                # file_.close()
-                with dbm.open('performance-numbers', 'c') as database:
-                    database[key] = '%f' % delta_t
+            if elements >= 1000000000:
+                continue
+
+            time0 = time.time()
+            self._test(
+                'evens %s elements: %d' % (
+                    "array",
+                    elements,
+                ),
+                Evens(elements),
+                trials=elements,
+                error_rate=1e-2,
+            )
+            time1 = time.time()
+            delta_t = time1 - time0
+            # file_ = open('%s.txt' % description, 'a')
+            # file_.write('%d %f\n' % (elements, delta_t))
+            # file_.close()
+            with dbm.open('performance-numbers', 'c') as database:
+                database[key] = '%f' % delta_t
 
     def test_probe_count(self):
         # test prob count ok
         bloom = bloom_filter2.BloomFilter(1000000, error_rate=.99)
         self.assertEqual(bloom.num_probes_k, 1)
-
-        bloom.close()
 
 
 if __name__ == '__main__':
