@@ -27,7 +27,8 @@ import array
 import math
 import os
 import random
-import hashing
+import hashutils
+import mmh3
 
 class Array_backend(object):
     """
@@ -87,33 +88,27 @@ def get_filter_bitno_probes(bloom_filter, key):
     Generate the array index and bitmask corresponding to each result
     """
 
-    # This one assumes key is either bytes or str (or other list of integers)
+    # Convert the key to bytes if it's a string, integer, or float
+    if isinstance(key, (str, int, float)):
+        key = str(key).encode()
 
-    if hasattr(key, '__divmod__'):
-        int_list = []
-        temp = key
-        while temp:
-            quotient, remainder = divmod(temp, 256)
-            int_list.append(remainder)
-            temp = quotient
-    elif isinstance(key, (list, tuple, str, bytes)) and not key:
-        int_list = []
-    elif hasattr(key[0], '__divmod__'):
-        int_list = key
-    elif isinstance(key[0], str):
-        int_list = [ord(char) for char in key]
-    else:
+    # Check if the key is a bytes-like object
+    if not isinstance(key, (bytes, bytearray)):
         raise TypeError('Sorry, I do not know how to hash this type')
 
-    hash_value1 = hashing.hash1(int_list)
-    hash_value2 = hashing.hash2(int_list)
-    probe_value = hash_value1
+    seed1 = 42
+    seed2 = 97
 
+    hash_value1 = mmh3.hash_bytes(key, seed=seed1)
+    hash_value2 = mmh3.hash_bytes(key, seed=seed2)
+    hash_int1 = int.from_bytes(hash_value1, byteorder='big', signed=True)
+    hash_int2 = int.from_bytes(hash_value2, byteorder='big', signed=True)
+
+    # Generate k hash functions by combining the two hash values
     for probeno in range(1, bloom_filter.num_probes_k + 1):
-        probe_value *= hash_value1
-        probe_value += hash_value2
-        probe_value %= hashing.MERSENNES1[2]
-        yield probe_value % bloom_filter.num_bits_m
+        combined_hash = hash_int1 + probeno * hash_int2
+        bit_index = combined_hash % bloom_filter.num_bits_m
+        yield bit_index
 
 class BloomFilter(object):
     """Probabilistic set membership testing for large sets"""
