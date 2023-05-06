@@ -1,4 +1,5 @@
 import math
+import random
 
 CHARACTERS = 'abcdefghijklmnopqrstuvwxyz1234567890'
 

@@ -126,7 +126,7 @@ class BloomFilter(object):
         self.error_rate_p = error_rate
         # With fewer elements, we should do very well. With more elements, our
         # error rate "guarantee" drops rapidly.
-        self.ideal_num_elements_n = max_elements
+        self.ideal_num_elements_n = int(max_elements)
 
         numerator = (
             -1

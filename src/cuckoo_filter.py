@@ -3,9 +3,9 @@ Cuckoo Filter
 """
 
 import random
-
-from . import bucket
-from . import hashutils
+import math
+import bucket
+import hashutils
 
 
 class CuckooFilter(object):
@@ -15,27 +15,27 @@ class CuckooFilter(object):
     Implements insert, delete and contains operations for the filter.
     """
 
-    def __init__(self, capacity, bucket_size=4, fingerprint_size=1,
-                 max_displacements=500):
+    def __init__(self, max_elements, error_rate = 0.01, bucket_size=4, max_displacements=500):
         """
         Initialize CuckooFilter object.
 
-        :param capacity: Size of the Cuckoo Filter
+        :param max_elements: Size of the Cuckoo Filter
+        :param error_rate: Maximum desired error rate
         :param bucket_size: Number of entries in a bucket
-        :param fingerprint_size: Fingerprint size in bytes
-        :param max_displacements: Maximum number of evictions before filter is
-        considered full
         """
-        self.capacity = capacity
+
+        self.max_elements = math.ceil(max_elements)
         self.bucket_size = bucket_size
-        self.fingerprint_size = fingerprint_size
+        # fingerprint_size in bits, pg 8 of https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
+        self.fingerprint_size = math.ceil(math.log2(1/error_rate) + math.log2(2 * bucket_size))
         self.max_displacements = max_displacements
         self.buckets = [bucket.Bucket(size=bucket_size)
-                        for _ in range(self.capacity)]
+                        for _ in range(self.max_elements)]
         self.size = 0
+        self.error_rate = error_rate
 
     def __repr__(self):
-        return '<CuckooFilter: capacity=' + str(self.capacity) + \
+        return '<CuckooFilter: max_elements=' + str(self.max_elements) + \
                ', size=' + str(self.size) + ', fingerprint size=' + \
                str(self.fingerprint_size) + ' byte(s)>'
 
@@ -46,16 +46,16 @@ class CuckooFilter(object):
         return self.contains(item)
 
     def _get_index(self, item):
-        index = hashutils.hash_code(item) % self.capacity
+        index = hashutils.hash_code(item) % self.max_elements
         return index
 
     def _get_alternate_index(self, index, fingerprint):
-        alt_index = (index ^ hashutils.hash_code(fingerprint)) % self.capacity
+        alt_index = (index ^ hashutils.hash_code(fingerprint)) % self.max_elements
         return alt_index
 
-    def insert(self, item):
+    def add(self, item):
         """
-        Insert an item into the filter.
+        Add an item into the filter.
 
         :param item: Item to be inserted.
         :return: True if insert is successful; CuckooFilterFullException if
@@ -77,7 +77,7 @@ class CuckooFilter(object):
             if self.buckets[eviction_index].insert(f):
                 self.size += 1
                 return True
-                
+
         # Filter is full
         raise Exception('Insert operation failed. Filter is full.')
 
