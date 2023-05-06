@@ -80,20 +80,6 @@ class Array_backend(object):
         return self
 
 
-def get_bitno_seed_rnd(bloom_filter, key):
-    """
-    Apply num_probes_k hash functions to key.
-
-    Generate the array index and bitmask corresponding to each result.
-    """
-
-    # We're using key as a seed to a pseudorandom number generator
-    hasher = random.Random(key).randrange
-    for dummy in range(bloom_filter.num_probes_k):
-        bitno = hasher(bloom_filter.num_bits_m)
-        yield bitno % bloom_filter.num_bits_m
-
-
 MERSENNES1 = [2 ** x - 1 for x in [17, 31, 127]]
 MERSENNES2 = [2 ** x - 1 for x in [19, 67, 257]]
 

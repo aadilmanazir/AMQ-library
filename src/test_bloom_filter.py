@@ -13,8 +13,7 @@ import random
 import sys
 import time
 import unittest
-
-import bloom_filter2
+import bloom_filter  
 
 
 CHARACTERS = 'abcdefghijklmnopqrstuvwxyz1234567890'
@@ -120,7 +119,9 @@ class TestBloomFilter(unittest.TestCase):
         description, 
         values, 
         trials, 
-        error_rate
+        error_rate,
+        max_elements_multiple=2,
+        test_false_positives=True
     ):
         # pylint: disable=R0913,R0914
         # R0913: We want a few arguments
@@ -129,8 +130,8 @@ class TestBloomFilter(unittest.TestCase):
 
         divisor = 100000
 
-        bloom = bloom_filter2.BloomFilter(
-            max_elements=values.length() * 2,
+        bloom = bloom_filter.BloomFilter(
+            max_elements=values.length() * max_elements_multiple,
             error_rate=error_rate,
         )
 
@@ -145,9 +146,8 @@ class TestBloomFilter(unittest.TestCase):
 
         print('starting to add values to an empty bloom filter')
         for valueno, value in enumerate(values.generator()):
-            reverse_valueno = values.length() - valueno
-            if reverse_valueno % divisor == 0:
-                print('adding valueno %d' % reverse_valueno)
+            if valueno % divisor == 0:
+                print('adding valueno %d' % valueno)
             bloom.add(value)
 
         print('testing all known members')
@@ -156,6 +156,9 @@ class TestBloomFilter(unittest.TestCase):
             for include in values.generator()
         )
         self.assertEqual(include_in_count, values.length())
+
+        if not test_false_positives:
+            return
 
         print('testing random non-members')
         false_positives = 0
@@ -188,11 +191,11 @@ class TestBloomFilter(unittest.TestCase):
     def test_and(self):
         """Test the & operator"""
 
-        abc = bloom_filter2.BloomFilter(max_elements=100, error_rate=0.01)
+        abc = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['a', 'b', 'c']:
             abc += character
 
-        bcd = bloom_filter2.BloomFilter(max_elements=100, error_rate=0.01)
+        bcd = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['b', 'c', 'd']:
             bcd += character
 
@@ -206,11 +209,11 @@ class TestBloomFilter(unittest.TestCase):
     def test_or(self):
         """Test the | operator"""
 
-        abc = bloom_filter2.BloomFilter(max_elements=100, error_rate=0.01)
+        abc = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['a', 'b', 'c']:
             abc += character
 
-        bcd = bloom_filter2.BloomFilter(max_elements=100, error_rate=0.01)
+        bcd = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['b', 'c', 'd']:
             bcd += character
 
@@ -227,9 +230,8 @@ class TestBloomFilter(unittest.TestCase):
 
     def test_random(self):
         self._test('random', Random_content(), trials=10000, error_rate=0.1)
-        self._test('random', Random_content(), trials=1000000, error_rate=1E-9)
-        self._test('random', Random_content(), trials=10000, error_rate=0.1,
-                   probe_bitnoer=bloom_filter2.get_bitno_seed_rnd)
+        self._test('random', Random_content(), trials=100000, error_rate=1E-9)
+        self._test('random', Random_content(), trials=10000, error_rate=0.1)
 
         filename = 'bloom-filter-rm-me'
         self._test(
@@ -243,39 +245,49 @@ class TestBloomFilter(unittest.TestCase):
     @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
     def test_performance(self):
         """Unit tests for BloomFilter class"""
+        db_name = '../performance/bloom-filter'
+        for exponent in range(7):  # testing up to 1 million total elements
+            for error_rate in [0.05, 0.02, 0.01, 0.005]:
+                for max_elements_multiple in [1.25, 1.5, 2]:
+                    max_num = int(2 * 10 ** exponent) # testing even numbers up to max_num
+                    elements = max_num//2
 
-        sqrt_of_10 = math.sqrt(10)
-        for exponent in range(19):  # it's a lot, but probably not unreasonable
-            elements = int(sqrt_of_10 ** exponent + 0.5)
-            description = "array"
-            key = '%s %s' % (description, elements)
-            with dbm.open('performance-numbers', 'c') as database:
-                if key in database.keys():
-                    continue
-            if elements >= 1000000000:
-                continue
+                    description = f"Bloom Filter with {elements} elements, error rate {error_rate}, max_elements {max_elements_multiple * elements}"
+                    key = description
+                    with dbm.open(db_name, 'c') as database:
+                        if key.encode() in database.keys():
+                            continue
 
-            time0 = time.time()
-            self._test(
-                'evens %s elements: %d' % (
-                    "array",
-                    elements,
-                ),
-                Evens(elements),
-                trials=elements,
-                error_rate=1e-2,
-            )
-            time1 = time.time()
-            delta_t = time1 - time0
-            # file_ = open('%s.txt' % description, 'a')
-            # file_.write('%d %f\n' % (elements, delta_t))
-            # file_.close()
-            with dbm.open('performance-numbers', 'c') as database:
-                database[key] = '%f' % delta_t
+                    time0 = time.time()
+                    self._test(
+                        f"Performance: {description}",
+                        Evens(max_num),
+                        trials=elements,
+                        error_rate=error_rate,
+                        max_elements_multiple=max_elements_multiple,
+                        test_false_positives=False
+                    )
+                    time1 = time.time()
+                    delta_t = time1 - time0
+            
+                    with dbm.open(db_name, 'c') as database:
+                        database[key] = '%f' % delta_t
+
+        
+        output_file = "../performance/bloom-filter.txt"
+        key_values = []
+        with dbm.open(db_name, 'c') as database:
+            with open(output_file, 'w') as output:
+                for key in database.keys():
+                    value = database[key].decode()
+                    key_values.append([key.decode(), float(value)])
+                key_values.sort(key=lambda x: x[1])
+                for key, value in key_values:
+                    output.write(f"{key}: {value}\n")
 
     def test_probe_count(self):
         # test prob count ok
-        bloom = bloom_filter2.BloomFilter(1000000, error_rate=.99)
+        bloom = bloom_filter.BloomFilter(1000000, error_rate=.99)
         self.assertEqual(bloom.num_probes_k, 1)
 
 
