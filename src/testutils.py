@@ -1,5 +1,13 @@
+import dbm
+import math
+import os
+import random
+import sys
+import time
+import unittest
 import math
 import random
+from pympler import asizeof
 
 CHARACTERS = 'abcdefghijklmnopqrstuvwxyz1234567890'
 

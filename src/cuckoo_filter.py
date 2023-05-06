@@ -25,12 +25,13 @@ class CuckooFilter(object):
         """
 
         self.max_elements = math.ceil(max_elements)
+        self.num_buckets = math.ceil(self.max_elements/bucket_size)
         self.bucket_size = bucket_size
         # fingerprint_size in bits, pg 8 of https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
         self.fingerprint_size = math.ceil(math.log2(1/error_rate) + math.log2(2 * bucket_size))
         self.max_displacements = max_displacements
         self.buckets = [bucket.Bucket(size=bucket_size)
-                        for _ in range(self.max_elements)]
+                        for _ in range(self.num_buckets)]
         self.size = 0
         self.error_rate = error_rate
 
@@ -46,11 +47,11 @@ class CuckooFilter(object):
         return self.contains(item)
 
     def _get_index(self, item):
-        index = hashutils.hash_code(item) % self.max_elements
+        index = hashutils.hash_code(item) % self.num_buckets
         return index
 
     def _get_alternate_index(self, index, fingerprint):
-        alt_index = (index ^ hashutils.hash_code(fingerprint)) % self.max_elements
+        alt_index = (index ^ hashutils.hash_code(fingerprint)) % self.num_buckets
         return alt_index
 
     def add(self, item):
