@@ -3,8 +3,7 @@
 
 from .bloom_filter import (
     BloomFilter,
-    get_filter_bitno_probes,
-    get_bitno_seed_rnd,
+    get_filter_bitno_probes
 )
 
 
@@ -13,6 +12,5 @@ __version__ = '2.0.0'
 
 __all__ = [
     'BloomFilter',
-    'get_filter_bitno_probes',
-    'get_bitno_seed_rnd',
+    'get_filter_bitno_probes'
 ]
