@@ -1,14 +1,14 @@
 """
 Cuckoo Filter
 """
-
+import os
 import random
 import math
-import bucket
-from .. import utils
-from .. import filter
+from . import bucket
+import utils
+from filter import Filter
 
-class CuckooFilter(filter.Filter):
+class CuckooFilter(Filter):
     """
     Cuckoo Filter class.
 

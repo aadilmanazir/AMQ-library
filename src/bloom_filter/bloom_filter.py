@@ -5,6 +5,7 @@ import math
 import os
 import random
 import mmh3
+from filter import Filter
 
 class Array_backend(object):
     """
@@ -86,7 +87,7 @@ def get_filter_bitno_probes(bloom_filter, key):
         bit_index = combined_hash % bloom_filter.num_bits_m
         yield bit_index
 
-class BloomFilter(object):
+class BloomFilter(Filter):
     """Probabilistic set membership testing for large sets"""
     def __init__(self,
                  max_elements=10000,

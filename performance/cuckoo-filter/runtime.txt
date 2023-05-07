@@ -1,140 +1,140 @@
-Cuckoo Filter with 1 elements, error rate 0.01, max_elements 1.3: 0.000238
-Cuckoo Filter with 1 elements, error rate 0.01, max_elements 2: 0.00024
-Cuckoo Filter with 1 elements, error rate 0.02, max_elements 2: 0.000241
-Cuckoo Filter with 1 elements, error rate 0.005, max_elements 1.1: 0.000241
-Cuckoo Filter with 1 elements, error rate 0.05, max_elements 1.5: 0.000242
-Cuckoo Filter with 1 elements, error rate 0.01, max_elements 1.1: 0.000242
-Cuckoo Filter with 1 elements, error rate 0.01, max_elements 1.5: 0.000242
-Cuckoo Filter with 1 elements, error rate 0.01, max_elements 1.2: 0.000242
-Cuckoo Filter with 1 elements, error rate 0.02, max_elements 1.5: 0.000243
-Cuckoo Filter with 1 elements, error rate 0.005, max_elements 1.2: 0.000244
-Cuckoo Filter with 1 elements, error rate 0.05, max_elements 1.3: 0.000248
-Cuckoo Filter with 1 elements, error rate 0.02, max_elements 1.3: 0.000248
-Cuckoo Filter with 1 elements, error rate 0.005, max_elements 1.5: 0.000248
-Cuckoo Filter with 1 elements, error rate 0.02, max_elements 1.1: 0.000249
-Cuckoo Filter with 1 elements, error rate 0.005, max_elements 1.3: 0.00025
-Cuckoo Filter with 1 elements, error rate 0.005, max_elements 2: 0.000252
-Cuckoo Filter with 1 elements, error rate 0.02, max_elements 1.2: 0.000261
-Cuckoo Filter with 1 elements, error rate 0.05, max_elements 2: 0.000284
-Cuckoo Filter with 1 elements, error rate 0.05, max_elements 1.2: 0.000288
-Cuckoo Filter with 10 elements, error rate 0.02, max_elements 12.0: 0.000488
-Cuckoo Filter with 10 elements, error rate 0.05, max_elements 15.0: 0.000488
-Cuckoo Filter with 10 elements, error rate 0.01, max_elements 13.0: 0.000489
-Cuckoo Filter with 10 elements, error rate 0.005, max_elements 13.0: 0.000489
-Cuckoo Filter with 10 elements, error rate 0.05, max_elements 13.0: 0.000491
-Cuckoo Filter with 10 elements, error rate 0.02, max_elements 11.0: 0.000491
-Cuckoo Filter with 10 elements, error rate 0.02, max_elements 13.0: 0.000492
-Cuckoo Filter with 10 elements, error rate 0.01, max_elements 15.0: 0.000492
-Cuckoo Filter with 10 elements, error rate 0.005, max_elements 11.0: 0.000492
-Cuckoo Filter with 10 elements, error rate 0.01, max_elements 12.0: 0.000492
-Cuckoo Filter with 10 elements, error rate 0.02, max_elements 15.0: 0.000493
-Cuckoo Filter with 10 elements, error rate 0.01, max_elements 11.0: 0.000493
-Cuckoo Filter with 10 elements, error rate 0.005, max_elements 12.0: 0.000497
-Cuckoo Filter with 10 elements, error rate 0.005, max_elements 15.0: 0.000502
-Cuckoo Filter with 10 elements, error rate 0.05, max_elements 12.0: 0.00051
-Cuckoo Filter with 10 elements, error rate 0.01, max_elements 20: 0.000566
-Cuckoo Filter with 10 elements, error rate 0.05, max_elements 20: 0.000567
-Cuckoo Filter with 10 elements, error rate 0.02, max_elements 20: 0.000568
-Cuckoo Filter with 10 elements, error rate 0.005, max_elements 20: 0.000572
-Cuckoo Filter with 10 elements, error rate 0.05, max_elements 11.0: 0.000691
-Cuckoo Filter with 1 elements, error rate 0.05, max_elements 1.1: 0.001086
-Cuckoo Filter with 100 elements, error rate 0.01, max_elements 120.0: 0.003059
-Cuckoo Filter with 100 elements, error rate 0.01, max_elements 110.00000000000001: 0.003062
-Cuckoo Filter with 100 elements, error rate 0.005, max_elements 120.0: 0.003071
-Cuckoo Filter with 100 elements, error rate 0.005, max_elements 110.00000000000001: 0.003082
-Cuckoo Filter with 100 elements, error rate 0.02, max_elements 110.00000000000001: 0.003121
-Cuckoo Filter with 100 elements, error rate 0.02, max_elements 120.0: 0.003136
-Cuckoo Filter with 100 elements, error rate 0.05, max_elements 120.0: 0.003207
-Cuckoo Filter with 100 elements, error rate 0.05, max_elements 110.00000000000001: 0.003232
-Cuckoo Filter with 100 elements, error rate 0.005, max_elements 150.0: 0.003534
-Cuckoo Filter with 100 elements, error rate 0.005, max_elements 200: 0.003537
-Cuckoo Filter with 100 elements, error rate 0.01, max_elements 200: 0.003547
-Cuckoo Filter with 100 elements, error rate 0.05, max_elements 200: 0.003554
-Cuckoo Filter with 100 elements, error rate 0.01, max_elements 150.0: 0.003561
-Cuckoo Filter with 100 elements, error rate 0.05, max_elements 130.0: 0.003569
-Cuckoo Filter with 100 elements, error rate 0.01, max_elements 130.0: 0.003576
-Cuckoo Filter with 100 elements, error rate 0.005, max_elements 130.0: 0.003583
-Cuckoo Filter with 100 elements, error rate 0.02, max_elements 200: 0.003621
-Cuckoo Filter with 100 elements, error rate 0.02, max_elements 130.0: 0.003625
-Cuckoo Filter with 100 elements, error rate 0.05, max_elements 150.0: 0.003678
-Cuckoo Filter with 100 elements, error rate 0.02, max_elements 150.0: 0.003698
-Cuckoo Filter with 1000 elements, error rate 0.05, max_elements 2000: 0.030653
-Cuckoo Filter with 1000 elements, error rate 0.05, max_elements 1300.0: 0.030654
-Cuckoo Filter with 1000 elements, error rate 0.05, max_elements 1500.0: 0.030668
-Cuckoo Filter with 1000 elements, error rate 0.05, max_elements 1100.0: 0.030801
-Cuckoo Filter with 1000 elements, error rate 0.05, max_elements 1200.0: 0.030866
-Cuckoo Filter with 1000 elements, error rate 0.02, max_elements 1300.0: 0.031398
-Cuckoo Filter with 1000 elements, error rate 0.02, max_elements 1200.0: 0.031441
-Cuckoo Filter with 1000 elements, error rate 0.02, max_elements 1100.0: 0.031446
-Cuckoo Filter with 1000 elements, error rate 0.01, max_elements 1100.0: 0.031478
-Cuckoo Filter with 1000 elements, error rate 0.01, max_elements 1200.0: 0.031647
-Cuckoo Filter with 1000 elements, error rate 0.005, max_elements 1100.0: 0.03173
-Cuckoo Filter with 1000 elements, error rate 0.01, max_elements 2000: 0.031738
-Cuckoo Filter with 1000 elements, error rate 0.02, max_elements 2000: 0.031764
-Cuckoo Filter with 1000 elements, error rate 0.02, max_elements 1500.0: 0.031825
-Cuckoo Filter with 1000 elements, error rate 0.005, max_elements 1200.0: 0.031876
-Cuckoo Filter with 1000 elements, error rate 0.005, max_elements 2000: 0.031898
-Cuckoo Filter with 1000 elements, error rate 0.01, max_elements 1300.0: 0.03195
-Cuckoo Filter with 1000 elements, error rate 0.005, max_elements 1300.0: 0.032016
-Cuckoo Filter with 1000 elements, error rate 0.005, max_elements 1500.0: 0.032271
-Cuckoo Filter with 1000 elements, error rate 0.01, max_elements 1500.0: 0.032319
-Cuckoo Filter with 10000 elements, error rate 0.05, max_elements 15000.0: 0.289992
-Cuckoo Filter with 10000 elements, error rate 0.05, max_elements 12000.0: 0.291758
-Cuckoo Filter with 10000 elements, error rate 0.05, max_elements 11000.0: 0.292225
-Cuckoo Filter with 10000 elements, error rate 0.05, max_elements 13000.0: 0.292386
-Cuckoo Filter with 10000 elements, error rate 0.02, max_elements 11000.0: 0.293863
-Cuckoo Filter with 10000 elements, error rate 0.02, max_elements 13000.0: 0.295344
-Cuckoo Filter with 10000 elements, error rate 0.02, max_elements 15000.0: 0.296904
-Cuckoo Filter with 10000 elements, error rate 0.02, max_elements 12000.0: 0.297386
-Cuckoo Filter with 10000 elements, error rate 0.005, max_elements 12000.0: 0.297699
-Cuckoo Filter with 10000 elements, error rate 0.01, max_elements 12000.0: 0.297704
-Cuckoo Filter with 10000 elements, error rate 0.005, max_elements 13000.0: 0.298389
-Cuckoo Filter with 10000 elements, error rate 0.01, max_elements 11000.0: 0.298857
-Cuckoo Filter with 10000 elements, error rate 0.01, max_elements 15000.0: 0.299594
-Cuckoo Filter with 10000 elements, error rate 0.01, max_elements 13000.0: 0.300597
-Cuckoo Filter with 10000 elements, error rate 0.005, max_elements 11000.0: 0.301343
-Cuckoo Filter with 10000 elements, error rate 0.005, max_elements 15000.0: 0.306762
-Cuckoo Filter with 10000 elements, error rate 0.05, max_elements 20000: 0.358525
-Cuckoo Filter with 10000 elements, error rate 0.02, max_elements 20000: 0.37277
-Cuckoo Filter with 10000 elements, error rate 0.01, max_elements 20000: 0.375669
-Cuckoo Filter with 10000 elements, error rate 0.005, max_elements 20000: 0.379072
-Cuckoo Filter with 100000 elements, error rate 0.05, max_elements 130000.0: 2.874199
-Cuckoo Filter with 100000 elements, error rate 0.05, max_elements 110000.00000000001: 2.881174
-Cuckoo Filter with 100000 elements, error rate 0.02, max_elements 130000.0: 2.924675
-Cuckoo Filter with 100000 elements, error rate 0.05, max_elements 120000.0: 2.929003
-Cuckoo Filter with 100000 elements, error rate 0.02, max_elements 120000.0: 2.962922
-Cuckoo Filter with 100000 elements, error rate 0.005, max_elements 110000.00000000001: 2.963861
-Cuckoo Filter with 100000 elements, error rate 0.005, max_elements 120000.0: 2.965367
-Cuckoo Filter with 100000 elements, error rate 0.01, max_elements 110000.00000000001: 2.967502
-Cuckoo Filter with 100000 elements, error rate 0.005, max_elements 130000.0: 2.984094
-Cuckoo Filter with 100000 elements, error rate 0.02, max_elements 110000.00000000001: 2.992866
-Cuckoo Filter with 100000 elements, error rate 0.01, max_elements 130000.0: 3.065125
-Cuckoo Filter with 100000 elements, error rate 0.01, max_elements 120000.0: 3.139615
-Cuckoo Filter with 100000 elements, error rate 0.05, max_elements 150000.0: 3.390965
-Cuckoo Filter with 100000 elements, error rate 0.05, max_elements 200000: 3.393249
-Cuckoo Filter with 100000 elements, error rate 0.02, max_elements 200000: 3.486947
-Cuckoo Filter with 100000 elements, error rate 0.005, max_elements 200000: 3.504566
-Cuckoo Filter with 100000 elements, error rate 0.02, max_elements 150000.0: 3.509717
-Cuckoo Filter with 100000 elements, error rate 0.01, max_elements 200000: 3.510302
-Cuckoo Filter with 100000 elements, error rate 0.005, max_elements 150000.0: 3.520956
-Cuckoo Filter with 100000 elements, error rate 0.01, max_elements 150000.0: 3.615119
-Cuckoo Filter with 1000000 elements, error rate 0.005, max_elements 1200000.0: 22.734757
-Cuckoo Filter with 1000000 elements, error rate 0.005, max_elements 2000000: 22.771233
-Cuckoo Filter with 1000000 elements, error rate 0.01, max_elements 2000000: 22.775875
-Cuckoo Filter with 1000000 elements, error rate 0.02, max_elements 1200000.0: 22.862733
-Cuckoo Filter with 1000000 elements, error rate 0.005, max_elements 1100000.0: 22.890676
-Cuckoo Filter with 1000000 elements, error rate 0.01, max_elements 1500000.0: 23.479591
-Cuckoo Filter with 1000000 elements, error rate 0.02, max_elements 1500000.0: 23.510179
-Cuckoo Filter with 1000000 elements, error rate 0.01, max_elements 1300000.0: 23.752018
-Cuckoo Filter with 1000000 elements, error rate 0.02, max_elements 1300000.0: 23.926758
-Cuckoo Filter with 1000000 elements, error rate 0.01, max_elements 1200000.0: 24.035998
-Cuckoo Filter with 1000000 elements, error rate 0.005, max_elements 1300000.0: 24.190549
-Cuckoo Filter with 1000000 elements, error rate 0.005, max_elements 1500000.0: 24.366885
-Cuckoo Filter with 1000000 elements, error rate 0.01, max_elements 1100000.0: 24.554804
-Cuckoo Filter with 1000000 elements, error rate 0.02, max_elements 2000000: 25.809727
-Cuckoo Filter with 1000000 elements, error rate 0.02, max_elements 1100000.0: 30.32612
-Cuckoo Filter with 1000000 elements, error rate 0.05, max_elements 1300000.0: 32.313821
-Cuckoo Filter with 1000000 elements, error rate 0.05, max_elements 2000000: 32.345414
-Cuckoo Filter with 1000000 elements, error rate 0.05, max_elements 1500000.0: 32.374111
-Cuckoo Filter with 1000000 elements, error rate 0.05, max_elements 1100000.0: 32.52233
-Cuckoo Filter with 1000000 elements, error rate 0.05, max_elements 1200000.0: 32.714428
+cuckoo-filter with 1 elements, error rate 0.005, max_elements 1.5: 0.000165
+cuckoo-filter with 1 elements, error rate 0.01, max_elements 2: 0.000168
+cuckoo-filter with 1 elements, error rate 0.005, max_elements 1.3: 0.000168
+cuckoo-filter with 1 elements, error rate 0.005, max_elements 2: 0.000168
+cuckoo-filter with 1 elements, error rate 0.01, max_elements 1.5: 0.000168
+cuckoo-filter with 1 elements, error rate 0.02, max_elements 1.5: 0.000169
+cuckoo-filter with 1 elements, error rate 0.005, max_elements 1.1: 0.000169
+cuckoo-filter with 1 elements, error rate 0.01, max_elements 1.3: 0.00017
+cuckoo-filter with 1 elements, error rate 0.02, max_elements 2: 0.00017
+cuckoo-filter with 1 elements, error rate 0.05, max_elements 1.5: 0.000172
+cuckoo-filter with 1 elements, error rate 0.01, max_elements 1.2: 0.000173
+cuckoo-filter with 1 elements, error rate 0.02, max_elements 1.1: 0.000175
+cuckoo-filter with 1 elements, error rate 0.005, max_elements 1.2: 0.000176
+cuckoo-filter with 1 elements, error rate 0.02, max_elements 1.3: 0.000176
+cuckoo-filter with 1 elements, error rate 0.05, max_elements 2: 0.00018
+cuckoo-filter with 1 elements, error rate 0.02, max_elements 1.2: 0.00018
+cuckoo-filter with 1 elements, error rate 0.05, max_elements 1.3: 0.000183
+cuckoo-filter with 1 elements, error rate 0.05, max_elements 1.2: 0.000188
+cuckoo-filter with 1 elements, error rate 0.01, max_elements 1.1: 0.000196
+cuckoo-filter with 10 elements, error rate 0.005, max_elements 13.0: 0.000352
+cuckoo-filter with 10 elements, error rate 0.005, max_elements 15.0: 0.000353
+cuckoo-filter with 10 elements, error rate 0.005, max_elements 11.0: 0.000358
+cuckoo-filter with 10 elements, error rate 0.005, max_elements 12.0: 0.000364
+cuckoo-filter with 10 elements, error rate 0.02, max_elements 12.0: 0.000364
+cuckoo-filter with 10 elements, error rate 0.02, max_elements 13.0: 0.000366
+cuckoo-filter with 10 elements, error rate 0.01, max_elements 11.0: 0.000367
+cuckoo-filter with 10 elements, error rate 0.02, max_elements 11.0: 0.000367
+cuckoo-filter with 10 elements, error rate 0.01, max_elements 12.0: 0.000367
+cuckoo-filter with 10 elements, error rate 0.01, max_elements 13.0: 0.00037
+cuckoo-filter with 10 elements, error rate 0.01, max_elements 15.0: 0.00037
+cuckoo-filter with 10 elements, error rate 0.05, max_elements 13.0: 0.000373
+cuckoo-filter with 10 elements, error rate 0.05, max_elements 12.0: 0.000376
+cuckoo-filter with 10 elements, error rate 0.05, max_elements 15.0: 0.000377
+cuckoo-filter with 10 elements, error rate 0.05, max_elements 11.0: 0.000378
+cuckoo-filter with 10 elements, error rate 0.005, max_elements 20: 0.000416
+cuckoo-filter with 10 elements, error rate 0.01, max_elements 20: 0.000417
+cuckoo-filter with 10 elements, error rate 0.05, max_elements 20: 0.000419
+cuckoo-filter with 10 elements, error rate 0.02, max_elements 20: 0.00043
+cuckoo-filter with 10 elements, error rate 0.02, max_elements 15.0: 0.000463
+cuckoo-filter with 1 elements, error rate 0.05, max_elements 1.1: 0.000488
+cuckoo-filter with 100 elements, error rate 0.02, max_elements 110.00000000000001: 0.002156
+cuckoo-filter with 100 elements, error rate 0.02, max_elements 120.0: 0.002203
+cuckoo-filter with 100 elements, error rate 0.05, max_elements 110.00000000000001: 0.002281
+cuckoo-filter with 100 elements, error rate 0.05, max_elements 120.0: 0.002311
+cuckoo-filter with 100 elements, error rate 0.01, max_elements 120.0: 0.002333
+cuckoo-filter with 100 elements, error rate 0.005, max_elements 120.0: 0.002335
+cuckoo-filter with 100 elements, error rate 0.05, max_elements 200: 0.002517
+cuckoo-filter with 100 elements, error rate 0.05, max_elements 130.0: 0.002583
+cuckoo-filter with 100 elements, error rate 0.05, max_elements 150.0: 0.002584
+cuckoo-filter with 100 elements, error rate 0.005, max_elements 110.00000000000001: 0.002586
+cuckoo-filter with 100 elements, error rate 0.01, max_elements 150.0: 0.002602
+cuckoo-filter with 100 elements, error rate 0.01, max_elements 130.0: 0.00262
+cuckoo-filter with 100 elements, error rate 0.02, max_elements 200: 0.002628
+cuckoo-filter with 100 elements, error rate 0.02, max_elements 150.0: 0.00267
+cuckoo-filter with 100 elements, error rate 0.005, max_elements 130.0: 0.002682
+cuckoo-filter with 100 elements, error rate 0.01, max_elements 200: 0.002709
+cuckoo-filter with 100 elements, error rate 0.005, max_elements 150.0: 0.002743
+cuckoo-filter with 100 elements, error rate 0.02, max_elements 130.0: 0.002751
+cuckoo-filter with 100 elements, error rate 0.005, max_elements 200: 0.002904
+cuckoo-filter with 100 elements, error rate 0.01, max_elements 110.00000000000001: 0.00305
+cuckoo-filter with 1000 elements, error rate 0.01, max_elements 1100.0: 0.022134
+cuckoo-filter with 1000 elements, error rate 0.02, max_elements 2000: 0.022593
+cuckoo-filter with 1000 elements, error rate 0.01, max_elements 1200.0: 0.022836
+cuckoo-filter with 1000 elements, error rate 0.02, max_elements 1200.0: 0.02293
+cuckoo-filter with 1000 elements, error rate 0.02, max_elements 1500.0: 0.02309
+cuckoo-filter with 1000 elements, error rate 0.005, max_elements 1500.0: 0.02315
+cuckoo-filter with 1000 elements, error rate 0.01, max_elements 1300.0: 0.023173
+cuckoo-filter with 1000 elements, error rate 0.005, max_elements 2000: 0.023273
+cuckoo-filter with 1000 elements, error rate 0.05, max_elements 1300.0: 0.023318
+cuckoo-filter with 1000 elements, error rate 0.02, max_elements 1100.0: 0.023709
+cuckoo-filter with 1000 elements, error rate 0.01, max_elements 1500.0: 0.023834
+cuckoo-filter with 1000 elements, error rate 0.05, max_elements 2000: 0.023903
+cuckoo-filter with 1000 elements, error rate 0.05, max_elements 1200.0: 0.024758
+cuckoo-filter with 1000 elements, error rate 0.005, max_elements 1200.0: 0.024817
+cuckoo-filter with 1000 elements, error rate 0.005, max_elements 1300.0: 0.025045
+cuckoo-filter with 1000 elements, error rate 0.02, max_elements 1300.0: 0.025073
+cuckoo-filter with 1000 elements, error rate 0.005, max_elements 1100.0: 0.0251
+cuckoo-filter with 1000 elements, error rate 0.05, max_elements 1100.0: 0.026872
+cuckoo-filter with 1000 elements, error rate 0.01, max_elements 2000: 0.033839
+cuckoo-filter with 1000 elements, error rate 0.05, max_elements 1500.0: 0.048355
+cuckoo-filter with 10000 elements, error rate 0.05, max_elements 12000.0: 0.183915
+cuckoo-filter with 10000 elements, error rate 0.05, max_elements 15000.0: 0.184586
+cuckoo-filter with 10000 elements, error rate 0.05, max_elements 11000.0: 0.188882
+cuckoo-filter with 10000 elements, error rate 0.01, max_elements 13000.0: 0.196567
+cuckoo-filter with 10000 elements, error rate 0.02, max_elements 12000.0: 0.198972
+cuckoo-filter with 10000 elements, error rate 0.01, max_elements 11000.0: 0.199504
+cuckoo-filter with 10000 elements, error rate 0.005, max_elements 13000.0: 0.204177
+cuckoo-filter with 10000 elements, error rate 0.02, max_elements 11000.0: 0.204532
+cuckoo-filter with 10000 elements, error rate 0.01, max_elements 12000.0: 0.20584
+cuckoo-filter with 10000 elements, error rate 0.005, max_elements 12000.0: 0.207344
+cuckoo-filter with 10000 elements, error rate 0.01, max_elements 15000.0: 0.207665
+cuckoo-filter with 10000 elements, error rate 0.05, max_elements 13000.0: 0.210165
+cuckoo-filter with 10000 elements, error rate 0.005, max_elements 15000.0: 0.210335
+cuckoo-filter with 10000 elements, error rate 0.005, max_elements 11000.0: 0.212076
+cuckoo-filter with 10000 elements, error rate 0.02, max_elements 15000.0: 0.212209
+cuckoo-filter with 10000 elements, error rate 0.02, max_elements 13000.0: 0.223213
+cuckoo-filter with 10000 elements, error rate 0.005, max_elements 20000: 0.250492
+cuckoo-filter with 10000 elements, error rate 0.05, max_elements 20000: 0.255318
+cuckoo-filter with 10000 elements, error rate 0.02, max_elements 20000: 0.266742
+cuckoo-filter with 10000 elements, error rate 0.01, max_elements 20000: 0.270321
+cuckoo-filter with 100000 elements, error rate 0.05, max_elements 110000.00000000001: 1.759204
+cuckoo-filter with 100000 elements, error rate 0.05, max_elements 120000.0: 1.880465
+cuckoo-filter with 100000 elements, error rate 0.05, max_elements 130000.0: 1.968722
+cuckoo-filter with 100000 elements, error rate 0.005, max_elements 130000.0: 2.001378
+cuckoo-filter with 100000 elements, error rate 0.005, max_elements 110000.00000000001: 2.031357
+cuckoo-filter with 100000 elements, error rate 0.01, max_elements 130000.0: 2.056121
+cuckoo-filter with 100000 elements, error rate 0.02, max_elements 130000.0: 2.065367
+cuckoo-filter with 100000 elements, error rate 0.005, max_elements 120000.0: 2.072125
+cuckoo-filter with 100000 elements, error rate 0.01, max_elements 110000.00000000001: 2.167453
+cuckoo-filter with 100000 elements, error rate 0.02, max_elements 120000.0: 2.229245
+cuckoo-filter with 100000 elements, error rate 0.01, max_elements 120000.0: 2.233597
+cuckoo-filter with 100000 elements, error rate 0.01, max_elements 150000.0: 2.328585
+cuckoo-filter with 100000 elements, error rate 0.02, max_elements 110000.00000000001: 2.337617
+cuckoo-filter with 100000 elements, error rate 0.01, max_elements 200000: 2.340663
+cuckoo-filter with 100000 elements, error rate 0.005, max_elements 150000.0: 2.362109
+cuckoo-filter with 100000 elements, error rate 0.02, max_elements 150000.0: 2.389436
+cuckoo-filter with 100000 elements, error rate 0.05, max_elements 200000: 2.422243
+cuckoo-filter with 100000 elements, error rate 0.05, max_elements 150000.0: 2.451652
+cuckoo-filter with 100000 elements, error rate 0.005, max_elements 200000: 2.455309
+cuckoo-filter with 100000 elements, error rate 0.02, max_elements 200000: 2.565193
+cuckoo-filter with 1000000 elements, error rate 0.05, max_elements 1300000.0: 20.130178
+cuckoo-filter with 1000000 elements, error rate 0.05, max_elements 1500000.0: 20.241749
+cuckoo-filter with 1000000 elements, error rate 0.05, max_elements 1200000.0: 20.314222
+cuckoo-filter with 1000000 elements, error rate 0.05, max_elements 2000000: 20.335088
+cuckoo-filter with 1000000 elements, error rate 0.02, max_elements 1200000.0: 20.786187
+cuckoo-filter with 1000000 elements, error rate 0.02, max_elements 1500000.0: 20.863488
+cuckoo-filter with 1000000 elements, error rate 0.02, max_elements 1300000.0: 20.895082
+cuckoo-filter with 1000000 elements, error rate 0.02, max_elements 1100000.0: 20.900664
+cuckoo-filter with 1000000 elements, error rate 0.01, max_elements 2000000: 21.204746
+cuckoo-filter with 1000000 elements, error rate 0.01, max_elements 1300000.0: 21.23562
+cuckoo-filter with 1000000 elements, error rate 0.01, max_elements 1200000.0: 21.343856
+cuckoo-filter with 1000000 elements, error rate 0.02, max_elements 2000000: 21.400909
+cuckoo-filter with 1000000 elements, error rate 0.01, max_elements 1500000.0: 21.403698
+cuckoo-filter with 1000000 elements, error rate 0.01, max_elements 1100000.0: 21.538265
+cuckoo-filter with 1000000 elements, error rate 0.05, max_elements 1100000.0: 21.708034
+cuckoo-filter with 1000000 elements, error rate 0.005, max_elements 2000000: 24.224373
+cuckoo-filter with 1000000 elements, error rate 0.005, max_elements 1100000.0: 24.538261
+cuckoo-filter with 1000000 elements, error rate 0.005, max_elements 1200000.0: 24.622136
+cuckoo-filter with 1000000 elements, error rate 0.005, max_elements 1300000.0: 24.662864
+cuckoo-filter with 1000000 elements, error rate 0.005, max_elements 1500000.0: 24.672844
