@@ -4,7 +4,6 @@ Vacuum Filter from https://www.vldb.org/pvldb/vol13/p197-wang.pdf
 import os
 import random
 import math
-from ../cuckoo_filter import bucket
 import utils
 from filter import Filter
 
@@ -13,14 +12,14 @@ class VacuumFilter(Filter):
     Implements insert, delete, and contains operations for the vacuum filter.
     """
 
-    def __init__(self, max_elements, bucket_size=4, error_rate=0.01, max_displacements=500):
+    def __init__(self, max_elements, error_rate=0.01, bucket_size=4, max_displacements=500):
         """
         Initialize the VacuumFilter object.
         """
         self.max_elements = max_elements  # n
         self.bucket_size = bucket_size
         self.num_buckets = math.ceil(self.max_elements / self.bucket_size)  # m
-        self.buckets = [bucket.Bucket(size=bucket_size)
+        self.buckets = [utils.Bucket(size=bucket_size)
                         for _ in range(self.num_buckets)]
         self.alternate_ranges = self._select_ranges()  # L
         self.size = 0  # k

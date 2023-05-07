@@ -4,7 +4,6 @@ Cuckoo Filter
 import os
 import random
 import math
-from . import bucket
 import utils
 from filter import Filter
 
@@ -31,7 +30,7 @@ class CuckooFilter(Filter):
         # fingerprint_size in bits, pg 8 of https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
         self.fingerprint_size = math.ceil(math.log2(1/error_rate) + math.log2(2 * bucket_size))
         self.max_displacements = max_displacements
-        self.buckets = [bucket.Bucket(size=bucket_size)
+        self.buckets = [utils.Bucket(size=bucket_size)
                         for _ in range(self.num_buckets)]
         self.size = 0
         self.error_rate = error_rate

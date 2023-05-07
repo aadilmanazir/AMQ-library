@@ -26,6 +26,8 @@ jobs:
       run: PYTHONPATH=src python3 test/test_bloom_filter.py
     - name: Test Cuckoo Filter
       run: PYTHONPATH=src python3 test/test_cuckoo_filter.py
+    - name: Test Vaccum Filter
+      run: PYTHONPATH=src python3 test/test_vacuum_filter.py
 
   check:
     runs-on: ubuntu-latest
