@@ -51,7 +51,7 @@ class TestBloomFilter(unittest.TestCase):
             include in bloom
             for include in values.generator()
         )
-        assert include_in_count >= values.length() 
+        self.assertEqual(include_in_count, values.length())
 
         if performance_test:
             total_size_in_bytes = asizeof.asizeof(bloom)

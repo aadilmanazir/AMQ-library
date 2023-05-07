@@ -7,7 +7,6 @@ import math
 import bucket
 import hashutils
 
-
 class CuckooFilter(object):
     """
     Cuckoo Filter class.
@@ -25,7 +24,8 @@ class CuckooFilter(object):
         """
 
         self.max_elements = math.ceil(max_elements)
-        self.num_buckets = math.ceil(self.max_elements/bucket_size)
+        # set self.num_buckets to the nearest power of 2 greater than or equal to self.max_elements/bucket_size
+        self.num_buckets = 2 ** math.ceil(math.log2(math.ceil(max_elements / bucket_size)))
         self.bucket_size = bucket_size
         # fingerprint_size in bits, pg 8 of https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
         self.fingerprint_size = math.ceil(math.log2(1/error_rate) + math.log2(2 * bucket_size))
@@ -47,11 +47,11 @@ class CuckooFilter(object):
         return self.contains(item)
 
     def _get_index(self, item):
-        index = hashutils.hash_code(item) % self.num_buckets
+        index = hashutils.hash_code(item, self.num_buckets)
         return index
 
     def _get_alternate_index(self, index, fingerprint):
-        alt_index = (index ^ hashutils.hash_code(fingerprint)) % self.num_buckets
+        alt_index = (index ^ hashutils.hash_code(fingerprint, self.num_buckets)) 
         return alt_index
 
     def add(self, item):
@@ -66,14 +66,14 @@ class CuckooFilter(object):
         i = self._get_index(item)
         j = self._get_alternate_index(i, fingerprint)
 
-        if self.buckets[i].insert(fingerprint) \
-                or self.buckets[j].insert(fingerprint):
+        if self.buckets[i].insert(fingerprint) or self.buckets[j].insert(fingerprint):
             self.size += 1
             return True
 
         eviction_index = random.choice([i, j])
+        f = fingerprint
         for _ in range(self.max_displacements):
-            f = self.buckets[eviction_index].swap(fingerprint)
+            f = self.buckets[eviction_index].swap(f)
             eviction_index = self._get_alternate_index(eviction_index, f)
             if self.buckets[eviction_index].insert(f):
                 self.size += 1
@@ -109,8 +109,7 @@ class CuckooFilter(object):
         fingerprint = hashutils.fingerprint(item, size=self.fingerprint_size)
         i = self._get_index(item)
         j = self._get_alternate_index(i, fingerprint)
-        if self.buckets[i].delete(fingerprint) \
-                or self.buckets[j].delete(fingerprint):
+        if self.buckets[i].delete(fingerprint) or self.buckets[j].delete(fingerprint):
             self.size -= 1
             return True
         return False
