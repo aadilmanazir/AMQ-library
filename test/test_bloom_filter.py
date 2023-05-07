@@ -6,93 +6,18 @@
 
 """Unit tests for bloom_filter"""
 
-from bloom_filter import bloom_filter
+from bloom_filter import BloomFilter
 from testutils import *
 
 class TestBloomFilter(unittest.TestCase):
-    def _test(
-        self,
-        description, 
-        values, 
-        trials, 
-        error_rate,
-        max_elements_multiple=2,
-        performance_test=False
-    ):
-        # pylint: disable=R0913,R0914
-        # R0913: We want a few arguments
-        # R0914: We want some local variables too.  This is just test code.
-        """Some quick automatic tests for the bloom filter class"""
-
-        divisor = 100000
-
-        bloom = bloom_filter.BloomFilter(
-            max_elements=values.length() * max_elements_multiple,
-            error_rate=error_rate,
-        )
-
-        message = '\ndescription: %s num_bits_m: %s num_probes_k: %s\n'
-        filled_out_message = message % (
-            description,
-            bloom.num_bits_m,
-            bloom.num_probes_k,
-        )
-
-        sys.stdout.write(filled_out_message)
-
-        print('starting to add values to an empty bloom filter')
-        for valueno, value in enumerate(values.generator()):
-            if valueno % divisor == 0:
-                print('adding valueno %d' % valueno)
-            bloom.add(value)
-
-        print('testing all known members')
-        include_in_count = sum(
-            include in bloom
-            for include in values.generator()
-        )
-        self.assertEqual(include_in_count, values.length())
-
-        if performance_test:
-            total_size_in_bytes = asizeof.asizeof(bloom)
-            return total_size_in_bytes
-
-        print('testing random non-members')
-        false_positives = 0
-        for trialno in range(trials):
-            if trialno % divisor == 0:
-                print(
-                    'trialno progress: %d / %d' % (trialno, trials),
-                    file=sys.stderr,
-                )
-            while True:
-                candidate = ''.join(random.sample(CHARACTERS, 5))
-                # If we accidentally found a member, try again
-                if values.within(candidate):
-                    continue
-                if candidate in bloom:
-                    # print('false positive: %s' % candidate)
-                    false_positives += 1
-                break
-
-        actual_error_rate = float(false_positives) / trials
-
-        self.assertLess(
-            actual_error_rate, error_rate,
-            "Too many false positives: actual: %s, expected: %s" % (
-                actual_error_rate,
-                error_rate,
-            ),
-        )
-
     def test_and(self):
         """Test the & operator"""
 
-        abc = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
+        abc = BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['a', 'b', 'c']:
             abc += character
 
-        bcd = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
+        bcd = BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['b', 'c', 'd']:
             bcd += character
 
@@ -106,11 +31,11 @@ class TestBloomFilter(unittest.TestCase):
     def test_or(self):
         """Test the | operator"""
 
-        abc = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
+        abc = BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['a', 'b', 'c']:
             abc += character
 
-        bcd = bloom_filter.BloomFilter(max_elements=100, error_rate=0.01)
+        bcd = BloomFilter(max_elements=100, error_rate=0.01)
         for character in ['b', 'c', 'd']:
             bcd += character
 
@@ -123,26 +48,26 @@ class TestBloomFilter(unittest.TestCase):
         self.assertNotIn('e', abc)
 
     def test_states(self):
-        self._test('states', States(), trials=100000, error_rate=0.01)
+        test_filter('states', States(), trials=100000, error_rate=0.01, filter_class=BloomFilter)
 
     def test_random(self):
-        self._test('random', Random_content(), trials=10000, error_rate=0.1)
-        self._test('random', Random_content(), trials=100000, error_rate=1E-4)
-        self._test('random', Random_content(), trials=10000, error_rate=0.1)
+        test_filter('random', Random_content(), trials=10000, error_rate=0.1, filter_class=BloomFilter)
+        test_filter('random', Random_content(), trials=100000, error_rate=1E-4, filter_class=BloomFilter)
+        test_filter('random', Random_content(), trials=10000, error_rate=0.1, filter_class=BloomFilter)
 
         filename = 'bloom-filter-rm-me'
-        self._test(
+        test_filter(
             'random',
             Random_content(),
             trials=10000,
             error_rate=0.1,
-
+            filter_class=BloomFilter
         )
 
 
     def test_probe_count(self):
         # test prob count ok
-        bloom = bloom_filter.BloomFilter(1000000, error_rate=.99)
+        bloom = BloomFilter(1000000, error_rate=.99)
         self.assertEqual(bloom.num_probes_k, 1)
 
     @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
@@ -170,13 +95,14 @@ class TestBloomFilter(unittest.TestCase):
                             continue
 
                     time0 = time.time()
-                    total_size_in_bytes = self._test(
+                    total_size_in_bytes = test_filter(
                         f"Performance: {description}",
                         Evens(max_num),
                         trials=elements,
                         error_rate=error_rate,
+                        filter_class=BloomFilter,
                         max_elements_multiple=max_elements_multiple,
-                        performance_test=True
+                        performancetest_filter=True
                     )
                     time1 = time.time()
                     delta_t = time1 - time0

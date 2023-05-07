@@ -6,8 +6,9 @@ import random
 import math
 import bucket
 from .. import utils
+from .. import filter
 
-class CuckooFilter(object):
+class CuckooFilter(filter.Filter):
     """
     Cuckoo Filter class.
 

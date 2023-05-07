@@ -103,3 +103,60 @@ class Evens(object):
     def length(self):
         """How many members?"""
         return int(math.ceil(self.maximum / 2.0))
+
+def test_filter(
+    description, 
+    values, 
+    trials, 
+    error_rate,
+    filter_class,
+    max_elements_multiple=2,
+    performance_test=False
+):
+    """Some quick automatic tests for a general filter class"""
+
+    divisor = 100000
+
+    filter_instance = filter_class(
+        max_elements=values.length() * max_elements_multiple,
+        error_rate=error_rate
+    )
+
+    print('starting to add values to an empty filter')
+    for valueno, value in enumerate(values.generator()):
+        if valueno % divisor == 0:
+            print('adding valueno %d' % valueno)
+        filter_instance.add(value)
+
+    print('testing all known members')
+    include_in_count = sum(
+        include in filter_instance
+        for include in values.generator()
+    )
+    assert include_in_count == values.length(), "Not all values were included in the filter"
+
+    if performance_test:
+        total_size_in_bytes = asizeof.asizeof(filter_instance)
+        return total_size_in_bytes
+
+    print('testing random non-members')
+    false_positives = 0
+    for trialno in range(trials):
+        if trialno % divisor == 0:
+            print(
+                'trialno progress: %d / %d' % (trialno, trials),
+                file=sys.stderr,
+            )
+        while True:
+            candidate = ''.join(random.sample(CHARACTERS, 5))
+            # If we accidentally found a member, try again
+            if values.within(candidate):
+                continue
+            if candidate in filter_instance:
+                # print('false positive: %s' % candidate)
+                false_positives += 1
+            break
+
+    actual_error_rate = float(false_positives) / trials
+    
+    assert actual_error_rate < error_rate, f"Too many false positives: actual: {actual_error_rate}, expected: {error_rate}"

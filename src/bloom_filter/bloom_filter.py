@@ -1,27 +1,4 @@
-# coding=utf-8
-# pylint: disable=superfluous-parens,redefined-variable-type
-# superfluous-parens: Sometimes extra parens are more clear
-
 """Bloom Filter: Probabilistic set membership testing for large sets"""
-
-# Shamelessly borrowed (under MIT license) from
-# https://code.activestate.com/recipes/577686-bloom-filter/
-# About Bloom Filters: https://en.wikipedia.org/wiki/Bloom_filter
-
-# Tweaked by Daniel Richard Stromberg, mostly to:
-# 1) Give it a little nicer __init__ parameters.
-# 2) Improve the hash functions to get a much lower rate of false positives.
-# 3) Give it a selection of backends.
-# 4) Make it pass pylint.
-
-# In the literature:
-# k is the number of probes - we call this num_probes_k
-# m is the number of bits in the filter - we call this num_bits_m
-# n is the ideal number of elements to eventually be stored in the filter - we
-# call this ideal_num_elements_n
-# p is the desired error rate when full - we call this error_rate_p
-
-from __future__ import division
 
 import array
 import math
@@ -198,9 +175,6 @@ class BloomFilter(object):
             if not self.backend.is_set(bitno):
                 return False
         return True
-
-    def __enter__(self):
-        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.backend = None

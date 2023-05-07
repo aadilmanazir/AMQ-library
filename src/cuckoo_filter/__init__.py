@@ -3,7 +3,6 @@
 
 from .cuckoo_filter import CuckooFilter
 
-
 __version__ = '1.0.0'
 
 __all__ = [
