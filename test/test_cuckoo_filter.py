@@ -6,8 +6,7 @@
 
 """Unit tests for cuckoo_filter"""
 
-import cuckoo_filter
-import hashutils
+from cuckoo_filter import cuckoo_filter
 from testutils import *
 
 class TestCuckooFilter(unittest.TestCase):
@@ -80,26 +79,6 @@ class TestCuckooFilter(unittest.TestCase):
                 error_rate,
             ),
         )
-    def test_elements_are_found(self):
-        max_elements = 1000
-        cf = cuckoo_filter.CuckooFilter(max_elements)
-
-        for i in range(max_elements):
-            try:
-                cf.add(i)
-            except Exception as e:
-                print(f"Error inserting {i}: {e}")
-
-        not_found = 0
-        for i in range(max_elements):
-            if i not in cf:
-                not_found += 1
-                fingerprint = hashutils.fingerprint(i, cf.fingerprint_size)
-                index1 = cf._get_index(i)
-                index2 = cf._get_alternate_index(index1, fingerprint)
-                print(f"Element {i} not found: fingerprint={fingerprint}, index1={index1}, index2={index2}")
-
-        print(f"Not found: {not_found} out of {max_elements}")
         
     def test_states(self):
         self._test('states', States(), trials=100000, error_rate=0.01)

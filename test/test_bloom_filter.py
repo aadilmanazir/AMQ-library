@@ -6,7 +6,7 @@
 
 """Unit tests for bloom_filter"""
 
-import bloom_filter  
+from bloom_filter import bloom_filter
 from testutils import *
 
 class TestBloomFilter(unittest.TestCase):

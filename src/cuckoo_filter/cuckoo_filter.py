@@ -5,7 +5,7 @@ Cuckoo Filter
 import random
 import math
 import bucket
-import hashutils
+from .. import utils
 
 class CuckooFilter(object):
     """
@@ -47,11 +47,11 @@ class CuckooFilter(object):
         return self.contains(item)
 
     def _get_index(self, item):
-        index = hashutils.hash_code(item, self.num_buckets)
+        index = utils.hash_code(item, self.num_buckets)
         return index
 
     def _get_alternate_index(self, index, fingerprint):
-        alt_index = (index ^ hashutils.hash_code(fingerprint, self.num_buckets)) 
+        alt_index = (index ^ utils.hash_code(fingerprint, self.num_buckets)) 
         return alt_index
 
     def add(self, item):
@@ -62,7 +62,7 @@ class CuckooFilter(object):
         :return: True if insert is successful; CuckooFilterFullException if
         filter is full.
         """
-        fingerprint = hashutils.fingerprint(item, self.fingerprint_size)
+        fingerprint = utils.fingerprint(item, self.fingerprint_size)
         i = self._get_index(item)
         j = self._get_alternate_index(i, fingerprint)
 
@@ -89,7 +89,7 @@ class CuckooFilter(object):
         :param item: Item to check its presence in the filter.
         :return: True, if item is in the filter; False, otherwise.
         """
-        fingerprint = hashutils.fingerprint(item, self.fingerprint_size)
+        fingerprint = utils.fingerprint(item, self.fingerprint_size)
         i = self._get_index(item)
         j = self._get_alternate_index(i, fingerprint)
 
@@ -106,7 +106,7 @@ class CuckooFilter(object):
         :param item: Item to delete from the filter.
         :return: True, if item is found and deleted; False, otherwise.
         """
-        fingerprint = hashutils.fingerprint(item, size=self.fingerprint_size)
+        fingerprint = utils.fingerprint(item, size=self.fingerprint_size)
         i = self._get_index(item)
         j = self._get_alternate_index(i, fingerprint)
         if self.buckets[i].delete(fingerprint) or self.buckets[j].delete(fingerprint):

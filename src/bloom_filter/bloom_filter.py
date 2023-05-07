@@ -27,7 +27,6 @@ import array
 import math
 import os
 import random
-import hashutils
 import mmh3
 
 class Array_backend(object):
