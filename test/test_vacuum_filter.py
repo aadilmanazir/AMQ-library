@@ -16,13 +16,12 @@ class TestVacuumFilter(unittest.TestCase):
     def test_random(self):
         test_filter_random(VacuumFilter)
 
-    # TODO: Is this relevant for a vacuum filter?
-    # def test_fingerprint_size(self):
-    #     # test prob count ok
-    #     vacuum = VacuumFilter(1000000, error_rate=.99)
-    #     assert vacuum.fingerprint_size >= 1
+    def test_fingerprint_size(self):
+        # test prob count ok
+        vacuum = VacuumFilter(1000000, error_rate=.99)
+        assert vacuum.fingerprint_size >= 1
 
-    @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
+    # @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
     def test_performance(self):
         test_filter_performance(VacuumFilter, "vacuum-filter")
 

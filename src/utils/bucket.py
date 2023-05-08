@@ -14,6 +14,18 @@ class Bucket(object):
     def __len__(self):
         return len(self.bucket)
 
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        if self.index < len(self):
+            value = self.bucket[self.index]
+            self.index += 1
+            return value
+        else:
+            raise StopIteration
+
     def insert(self, item):
         """
         Insert a fingerprint into the bucket
@@ -38,7 +50,7 @@ class Bucket(object):
             return False
 
     def is_full(self):
-        return len(self.bucket) == self.size
+        return len(self) == self.size
 
     def swap(self, item):
         """
@@ -47,7 +59,16 @@ class Bucket(object):
         :param item:
         :return:
         """
-        index = random.choice(range(len(self.bucket)))
+        index = random.choice(range(len(self)))
         swapped_item = self.bucket[index]
         self.bucket[index] = item
         return swapped_item
+
+    def place(self, item, old_item):
+        """
+        Put fingerprint into bucket at the location of the old fingerprint.
+        :param item:
+        :param old_item:
+        """
+        self.bucket.remove(old_item)
+        self.insert(item)

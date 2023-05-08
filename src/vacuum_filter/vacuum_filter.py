@@ -12,11 +12,12 @@ class VacuumFilter(Filter):
     Implements insert, delete, and contains operations for the vacuum filter.
     """
 
-    def __init__(self, max_elements, error_rate=0.01, bucket_size=4, max_displacements=500):
+    def __init__(self, max_elements, error_rate=0.05, bucket_size=4, max_displacements=500):
         """
         Initialize the VacuumFilter object.
         """
         self.max_elements = max_elements  # n
+        self.error_rate = error_rate
         self.bucket_size = bucket_size
         self.num_buckets = math.ceil(self.max_elements / self.bucket_size)  # m
         self.buckets = [utils.Bucket(size=bucket_size)
@@ -24,7 +25,6 @@ class VacuumFilter(Filter):
         self.alternate_ranges = self._select_ranges()  # L
         self.size = 0  # k
 
-        self.error_rate = error_rate
         self.fingerprint_size = math.ceil(math.log2(self.bucket_size) +
                                           math.log2(1 / self.error_rate) + 1)
         self.fingerprint = lambda item: utils.fingerprint(item, self.fingerprint_size)  # H'
@@ -50,7 +50,7 @@ class VacuumFilter(Filter):
         alt_ranges = [0] * num_groups
         for i in range(num_groups):
             L = 1
-            while not self._load_factor_test(0.95, 1 - i / num_groups, L):
+            while not self._load_factor_test(0.95, 1 - i / num_groups, L) and L <= self.num_buckets:
                 L = L * 2
             alt_ranges[i] = L
         alt_ranges[num_groups - 1] *= 2
@@ -68,8 +68,8 @@ class VacuumFilter(Filter):
         # N/c
         inserted_per_chunk = num_inserted_items / num_chunks
 
-        estimated_max_load = inserted_per_chunk + 1.5 * math.sqrt(2 * items_per_chunk + 0.693147181 * math.log2(num_chunks))  # ln 2 * log_2
-        chunk_capacity_lower_bound = 3.88 * target_load_factor  # 4 * 0.97
+        estimated_max_load = inserted_per_chunk + 1.5 * math.sqrt(2 * inserted_per_chunk * math.log(num_chunks))
+        chunk_capacity_lower_bound = 3.88 * alternate_range
         return estimated_max_load < chunk_capacity_lower_bound
 
     def add(self, item):
@@ -92,10 +92,10 @@ class VacuumFilter(Filter):
         eviction_index = random.choice([i, j])
         for _ in range(self.max_displacements):
             for f_prime in self.buckets[eviction_index]:
-                j_prime = self._get_alternate_index(eviction_index, f_prime)
-                if not self.buckets[j_prime].is_full():
-                    f = self.buckets[j_prime].swap(f)
-                    if self.buckets[j_prime].insert(f):
+                alt_eviction_index = self._get_alternate_index(eviction_index, f_prime)
+                if not self.buckets[alt_eviction_index].is_full():
+                    self.buckets[eviction_index].place(f, f_prime)
+                    if self.buckets[alt_eviction_index].insert(f_prime):
                         self.size += 1
                         return True
             f = self.buckets[eviction_index].swap(f)
@@ -109,7 +109,7 @@ class VacuumFilter(Filter):
 
     def _get_alternate_index(self, index, fingerprint):
         alt_index = index
-        finger_hash = utils.fingerprint(fingerprint)
+        finger_hash = self.fingerprint(fingerprint)
         if self.size < 262144:  # 2 ** 18
             m = self.num_buckets
             delta = finger_hash % m
@@ -118,7 +118,8 @@ class VacuumFilter(Filter):
             alt_index = (m - 1 - alt_index + delta) % m
         else:
             curr_range = self.alternate_ranges[fingerprint % 4]
-            alt_index = index ^ (finger_hash % curr_range)
+            alt_index = (index ^ (finger_hash % curr_range))
+            alt_index = alt_index % self.num_buckets  # ?
         return alt_index
 
     def contains(self, item):

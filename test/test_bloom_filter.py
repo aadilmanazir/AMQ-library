@@ -52,7 +52,7 @@ class TestBloomFilter(unittest.TestCase):
         self.assertIn('c', abc)
         self.assertIn('d', abc)
         self.assertNotIn('e', abc)
-        
+
     def test_probe_count(self):
         # test prob count ok
         bloom = BloomFilter(1000000, error_rate=.99)
