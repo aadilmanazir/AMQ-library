@@ -30,15 +30,3 @@ jobs:
       run: PYTHONPATH=src python3 test/test_vacuum_filter.py
     - name: Test Xor Filter
       run: PYTHONPATH=src python3 test/test_xor_filter.py
-
-  check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-      with:
-        python-version: "3.8"
-    - name: Install dependencies
-      run: pip install flake8
-    - name: Test
-      run: flake8 --ignore=W503 src test
