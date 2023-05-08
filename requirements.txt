@@ -1,2 +1,3 @@
 murmurhash3
 pympler
+numpy

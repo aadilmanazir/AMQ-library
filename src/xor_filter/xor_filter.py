@@ -61,7 +61,7 @@ class XorFilter:
         h0, h1, h2 = None, None, None
         success, stack = False, []
         while not success:
-            seeds = random.sample(range(1 << 32), 3)
+            seeds = random.sample(range(1 << 31), 3)
             if fingerprint_seed in seeds:
                 continue
             h0, h1, h2 = get_hash_funcs(seeds, self.size)

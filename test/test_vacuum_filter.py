@@ -21,7 +21,7 @@ class TestVacuumFilter(unittest.TestCase):
         vacuum = VacuumFilter(1000000, error_rate=.99)
         assert vacuum.fingerprint_size >= 1
 
-    # @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
+    @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
     def test_performance(self):
         test_filter_performance(VacuumFilter, "vacuum-filter")
 

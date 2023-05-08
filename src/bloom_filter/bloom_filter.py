@@ -11,9 +11,6 @@ class Array_backend(object):
     """
     Backend storage for our "array of bits" using a python array of integers
     """
-
-    # Note that this has now been split out into a bits_mod for the benefit of
-    # other projects.
     effs = 2 ** 32 - 1
 
     def __init__(self, num_bits):

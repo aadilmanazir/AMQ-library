@@ -12,7 +12,8 @@ class TestXorFilter(unittest.TestCase):
 
     def test_random(self):
         test_filter_random(XorFilter)
-
+        
+    @unittest.skipUnless(os.environ.get('TEST_PERF', ''), "disabled")
     def test_performance(self):
         test_filter_performance(XorFilter, "xor-filter")
 

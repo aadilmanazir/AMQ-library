@@ -28,6 +28,8 @@ jobs:
       run: PYTHONPATH=src python3 test/test_cuckoo_filter.py
     - name: Test Vaccum Filter
       run: PYTHONPATH=src python3 test/test_vacuum_filter.py
+    - name: Test Xor Filter
+      run: PYTHONPATH=src python3 test/test_xor_filter.py
 
   check:
     runs-on: ubuntu-latest

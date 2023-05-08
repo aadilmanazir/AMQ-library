@@ -227,8 +227,6 @@ def test_filter_performance(filter_class, filter_name):
                     elements = max_num // 2
                     if filter_name == "vacuum-filter" and error_rate != 0.05:
                         continue
-                    # if filter_name == "xor-filter" and exponent == 10 ** 6:
-                    #     continue
 
                     description = f"{filter_name} with {elements} elements, error rate {error_rate}, max_elements {max_elements_multiple * elements}"
                     key = description
