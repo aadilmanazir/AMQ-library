@@ -65,9 +65,7 @@ def get_filter_bitno_probes(bloom_filter, key):
     # Convert the key to bytes if it's a string, integer, or float
     if isinstance(key, (str, int, float)):
         key = str(key).encode()
-
-    # Check if the key is a bytes-like object
-    if not isinstance(key, (bytes, bytearray)):
+    else:
         raise TypeError('Sorry, I do not know how to hash this type')
 
     seed1 = 42

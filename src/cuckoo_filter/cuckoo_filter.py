@@ -13,7 +13,7 @@ class CuckooFilter(Filter):
 
     Implements insert, delete and contains operations for the filter.
     """
-
+    
     def __init__(self, max_elements, error_rate = 0.01, bucket_size=4, max_displacements=500):
         """
         Initialize CuckooFilter object.
