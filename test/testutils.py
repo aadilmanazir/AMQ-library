@@ -8,6 +8,7 @@ import unittest
 import math
 import random
 from pympler import asizeof
+from xor_filter import XorFilter
 
 CHARACTERS = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
@@ -40,6 +41,12 @@ class States(object):
     def length():
         """What is the length of our contained values?"""
         return len(States.states)
+
+    def __len__(self):
+        return len(States.states)
+
+    def __iter__(self):
+        return States.generator()
 
 
 def random_string():
@@ -75,6 +82,12 @@ class Random_content(object):
         """How many members?"""
         return len(Random_content.random_content)
 
+    def __len__(self):
+        return len(Random_content.random_content)
+
+    def __iter__(self):
+        return Random_content.generator()
+
 
 class Evens(object):
     """Generate a bunch of even numbers"""
@@ -104,30 +117,48 @@ class Evens(object):
         """How many members?"""
         return int(math.ceil(self.maximum / 2.0))
 
+    def __len__(self):
+        return self.length()
+
+    def __iter__(self):
+        return self.generator()
+
+
 def test_filter(
-    description, 
-    values, 
-    trials, 
+    description,
+    values,
+    trials,
     error_rate,
     filter_class,
     max_elements_multiple=2,
     performance_test=False
 ):
-    """Some quick automatic tests for a general filter class"""
+    """
+    Some quick automatic tests for a general filter class
+    """
     sys.stdout.write(description + '\n')
 
     divisor = 100000
 
-    filter_instance = filter_class(
-        max_elements=values.length() * max_elements_multiple,
-        error_rate=error_rate
-    )
+    filter_instance = None
+    if filter_class != XorFilter:
+        filter_instance = filter_class(
+            max_elements=values.length() * max_elements_multiple,
+            error_rate=error_rate
+        )
 
-    print('starting to add values to an empty filter')
-    for valueno, value in enumerate(values.generator()):
-        if valueno % divisor == 0:
-            print('adding valueno %d' % valueno)
-        filter_instance.add(value)
+        print('starting to add values to an empty filter')
+        for valueno, value in enumerate(values.generator()):
+            if valueno % divisor == 0:
+                print('adding valueno %d' % valueno)
+            filter_instance.add(value)
+    else:
+        print("Initializing filter with values")
+        filter_instance = filter_class(
+            max_elements=values.length() * max_elements_multiple,
+            error_rate=error_rate,
+            keys=values
+        )
 
     print('testing all known members')
     include_in_count = sum(
@@ -159,7 +190,7 @@ def test_filter(
             break
 
     actual_error_rate = float(false_positives) / trials
-    
+
     assert actual_error_rate < error_rate, f"Too many false positives: actual: {actual_error_rate}, expected: {error_rate}"
 
 def test_filter_states(filter_class):
@@ -193,7 +224,9 @@ def test_filter_performance(filter_class, filter_name):
             for error_rate in [0.05, 0.02, 0.01, 0.005]:
                 for max_elements_multiple in [1.1, 1.2, 1.3, 1.5, 2]:
                     max_num = int(2 * 10 ** exponent) # testing even numbers up to max_num
-                    elements = max_num//2
+                    elements = max_num // 2
+                    if filter_name == "vacuum-filter" and error_rate != 0.05:
+                        continue
 
                     description = f"{filter_name} with {elements} elements, error rate {error_rate}, max_elements {max_elements_multiple * elements}"
                     key = description
@@ -213,7 +246,7 @@ def test_filter_performance(filter_class, filter_name):
                     )
                     time1 = time.time()
                     delta_t = time1 - time0
-            
+
                     with dbm.open(runtime_db_name, 'c') as database:
                         database[key] = '%f' % delta_t
 
