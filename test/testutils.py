@@ -197,17 +197,10 @@ def test_filter_states(filter_class):
     test_filter('states', States(), trials=100000, error_rate=0.01, filter_class=filter_class)
 
 def test_filter_random(filter_class):
-    test_filter('random', Random_content(), trials=10000, error_rate=0.1, filter_class=filter_class)
+    test_filter('random', Random_content(), trials=100000, error_rate=0.1, filter_class=filter_class)
+    test_filter('random', Random_content(), trials=100000, error_rate=1E-2, filter_class=filter_class)
+    test_filter('random', Random_content(), trials=100000, error_rate=1E-3, filter_class=filter_class)
     test_filter('random', Random_content(), trials=100000, error_rate=1E-4, filter_class=filter_class)
-    test_filter('random', Random_content(), trials=10000, error_rate=0.1, filter_class=filter_class)
-
-    test_filter(
-        'random',
-        Random_content(),
-        trials=10000,
-        error_rate=0.1,
-        filter_class=filter_class
-    )
 
 def test_filter_performance(filter_class, filter_name):
         """Performance tests for a general class"""
