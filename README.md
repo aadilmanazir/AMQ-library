@@ -1,4 +1,11 @@
 ## AMQ-Library
+This library provides python implementations for several solutions to the Approximate Membership Query problem. It also contains a correctness and performance testing framework.
+
+Implemented solutions include:
+- bloom filter
+- cuckoo filter
+- vaccuum filter
+- xor filter
 
 ### Getting started
 `pip install -r requirements.txt -e .`
